@@ -11,10 +11,10 @@
 
         public Product(string codigo, string descricao, string departamento, decimal preco)
         {
-            ValidarCodigo(codigo);
-            ValidarDescricao(descricao);
-            ValidarDepartamento(departamento);
-            ValidarPreco(preco);
+            ValidateCodigo(codigo);
+            ValidateDescricao(descricao);
+            ValidateDepartamento(departamento);
+            ValidatePreco(preco);
 
             Id = Guid.NewGuid();
             Codigo = codigo;
@@ -24,26 +24,33 @@
             Status = true;
         }
 
-        public void AlterarDescricao(string descricao)
+        private Product(Guid id, string codigo, string descricao, string departamento, decimal preco, bool status)
         {
-            ValidarDescricao(descricao);
+            Id = id;
+            Codigo = codigo;
             Descricao = descricao;
-        }
-        public void AlterarDepartamento(string departamento)
-        {
-            ValidarDepartamento(departamento);
             Departamento = departamento;
+            Preco = preco;
+            Status = status;
         }
-        public void AlterarPreco(decimal preco)
+
+        public static Product FromDatabase(Guid id, string codigo, string descricao, string departamento, decimal preco, bool status)
+            => new(id, codigo, descricao, departamento, preco, status);
+
+        public void Update(string descricao, string departamento, decimal preco)
         {
-            ValidarPreco(preco);
+            ValidateDescricao(descricao);
+            ValidateDepartamento(departamento);
+            ValidatePreco(preco);
+
+            Departamento = departamento;
+            Descricao = descricao;
             Preco = preco;
         }
 
-        public void Excluir() => Status = false;
-        public void Reativar() => Status = true;
+        public void Delete() => Status = false;
 
-        private static void ValidarCodigo(string codigo)
+        private static void ValidateCodigo(string codigo)
         {
             if (string.IsNullOrEmpty(codigo))
                 throw new ArgumentException("O campo 'Código' não pode ficar vazio.");
@@ -52,19 +59,19 @@
                 throw new ArgumentException("O código informado é muito extenso, informe um valor menor que 255 caracteres.");
         }
 
-        private static void ValidarDescricao(string descricao)
+        private static void ValidateDescricao(string descricao)
         {
             if (string.IsNullOrEmpty(descricao))
                 throw new ArgumentException("O campo 'Descrição' não pode ficar vazio.");
         }
 
-        private static void ValidarDepartamento(string departamento)
+        private static void ValidateDepartamento(string departamento)
         {
             if (string.IsNullOrEmpty(departamento))
                 throw new ArgumentException("O campo 'Departamento' não pode ficar vazio.");
         }
 
-        private static void ValidarPreco(decimal preco)
+        private static void ValidatePreco(decimal preco)
         {
             if (preco <= 0)
                 throw new ArgumentException("O campo 'Preço' deve possuir um valor maior que zero.");

@@ -2,10 +2,10 @@
 {
     public interface IProductRepository
     {
-        void Adicionar(Product produto);
-        IEnumerable<Product> ObterTodos();
-        Product ObterPorId(Guid id);
-        void Atualizar(Product produto);
-        void Remover(Guid id);
+        void Create(Product produto);
+        IEnumerable<Product> GetAll();
+        Product? GetById(Guid id);
+        void Update(Product produto);
+        void Delete(Product produto);
     }
 }
