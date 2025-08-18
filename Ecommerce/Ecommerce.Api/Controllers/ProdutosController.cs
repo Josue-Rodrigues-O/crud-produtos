@@ -1,31 +1,43 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Ecommerce.Application.Dtos;
+using Ecommerce.Application.Services;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Ecommerce.Api.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class ProdutosController : ControllerBase
+    public class ProdutosController(ProductService productService) : ControllerBase
     {
-        public ProdutosController() { }
+        [HttpPost]
+        public CreatedResult Create([FromBody] ProductDto productDto)
+        {
+            var product = productService.Create(productDto);
+            return Created(product.Id.ToString(), product);
+        }
 
         [HttpGet]
-        public OkObjectResult Produtos()
+        public OkObjectResult GetAll()
         {
-            return Ok(new object[]
-            {
-                new
-                {
-                    Id = Guid.NewGuid(),
-                    Descricao = "Teste 1",
-                    Preco = 12.50M
-                },
-                new
-                {
-                    Id = Guid.NewGuid(),
-                    Descricao = "Teste 2",
-                    Preco = 28.99M
-                },
-            });
+            return Ok(productService.GetAll());
+        }
+
+        [HttpGet("{id:guid}")]
+        public OkObjectResult GetById([FromRoute] Guid id)
+        {
+            return Ok(productService.GetById(id));
+        }
+
+        [HttpPut("{id:guid}")]
+        public void Update([FromRoute] Guid id, ProductDto productDto)
+        {
+            productService.Update(id, productDto);
+        }
+
+        [HttpDelete("{id:guid}")]
+        public NoContentResult Delete([FromRoute] Guid id)
+        {
+            productService.Delete(id);
+            return NoContent();
         }
     }
 }
