@@ -3,7 +3,7 @@ using Microsoft.Data.SqlClient;
 
 namespace Ecommerce.Infrastructure.SqlServer
 {
-    public sealed class ProductRepository : IDisposable, IProductRepository
+    public sealed class ProductRepository : IProductRepository
     {
         private readonly SqlConnection sqlConnection;
         public ProductRepository()
@@ -93,7 +93,7 @@ namespace Ecommerce.Infrastructure.SqlServer
             command.ExecuteNonQuery();
         }
 
-        public void Dispose()
+        ~ProductRepository()
         {
             sqlConnection.Dispose();
         }
