@@ -59,11 +59,11 @@ namespace Ecommerce.Infrastructure.SqlServer
 
             if (!reader.Read()) return null;
 
-            var codigo = reader.GetString(1);
-            var descricao = reader.GetString(2);
-            var departamento = reader.GetString(3);
-            var preco = reader.GetDecimal(4);
-            var status = reader.GetBoolean(5);
+            var codigo = reader.GetString(0);
+            var descricao = reader.GetString(1);
+            var departamento = reader.GetString(2);
+            var preco = reader.GetDecimal(3);
+            var status = reader.GetBoolean(4);
             return Product.FromDatabase(id, codigo, descricao, departamento, preco, status);
         }
 
