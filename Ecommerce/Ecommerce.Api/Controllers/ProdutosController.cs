@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Ecommerce.Api.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class ProdutosController(ProductService productService) : ControllerBase
     {
         [HttpPost]
@@ -28,9 +28,10 @@ namespace Ecommerce.Api.Controllers
         }
 
         [HttpPut("{id:guid}")]
-        public void Update([FromRoute] Guid id, ProductDto productDto)
+        public NoContentResult Update([FromRoute] Guid id, ProductDto productDto)
         {
             productService.Update(id, productDto);
+            return NoContent();
         }
 
         [HttpDelete("{id:guid}")]

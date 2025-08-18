@@ -67,6 +67,9 @@
               "buildTarget": "Ecommerce.Client:build:development"
             }
           },
+          "options": {
+            "proxyConfig": "proxy.conf.json"
+          },
           "defaultConfiguration": "development"
         },
         "extract-i18n": {
@@ -93,5 +96,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "235f9754-d618-4bf8-82bf-f4827f1ea07e"
   }
 }
