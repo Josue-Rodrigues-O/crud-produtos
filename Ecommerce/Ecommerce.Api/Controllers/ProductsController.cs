@@ -1,12 +1,14 @@
 ﻿using Ecommerce.Application.Dtos;
 using Ecommerce.Application.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Ecommerce.Api.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class ProdutosController(ProductService productService) : ControllerBase
+    [Authorize]
+    public class ProductsController(ProductService productService) : ControllerBase
     {
         [HttpPost]
         public CreatedResult Create([FromBody] ProductDto productDto)
