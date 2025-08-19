@@ -1,0 +1,19 @@
+:host {
+    display: block;
+    width: max-content;
+}
+
+button {
+    font-weight: 500;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4pt;
+    font-size: 14px;
+    width: 100%;
+    transition: filter 0.2, color 0.2s;
+}
+
+button:hover {
+    cursor: pointer;
+    filter: brightness(95%);
+}

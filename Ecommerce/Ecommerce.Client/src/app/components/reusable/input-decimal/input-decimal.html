@@ -1,0 +1,5 @@
+<input type="number" step="0.01" [placeholder]="placeholder()" [value]="value()" (input)="onInput($event)"
+    (blur)="onBlur($event)" />
+@if (isInvalidValue) {
+    <span>{{messageError}}</span>
+}
