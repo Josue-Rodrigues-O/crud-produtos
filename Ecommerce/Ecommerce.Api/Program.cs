@@ -1,7 +1,4 @@
-
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
-using System.Text;
+using Ecommerce.Api.Middlewares;
 
 namespace Ecommerce.Api
 {
@@ -20,6 +17,7 @@ namespace Ecommerce.Api
             builder.Services.AddAuthorization();
 
             var app = builder.Build();
+            app.UseMiddleware<ProblemDetailsMiddleware>();
 
             if (app.Environment.IsDevelopment())
             {
