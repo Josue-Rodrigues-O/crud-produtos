@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-side-menu',
@@ -7,5 +8,11 @@ import { Component } from '@angular/core';
   styleUrl: './side-menu.css'
 })
 export class SideMenu {
+  constructor(private router: Router) {
 
+  }
+
+  onClickMenuIten(route: string) {
+    this.router.navigate([`/ecommerce/${route}`]);
+  }
 }

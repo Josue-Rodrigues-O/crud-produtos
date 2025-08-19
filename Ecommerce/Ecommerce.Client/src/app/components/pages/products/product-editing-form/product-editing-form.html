@@ -1,0 +1,19 @@
+<dialog #dialog>
+    <h3>Editar produto</h3>
+
+    <form>
+        <label>Descrição</label>
+        <app-input #descricao placeholder="Ex.: Frango" [(value)]="product.descricao" />
+
+        <label>Departamento</label>
+        <app-input #departamento placeholder="Ex.: CONGELADOS" [(value)]="product.departamento" />
+
+        <label>Preço</label>
+        <app-input-decimal #preco placeholder="Ex.: 18,50" [(value)]="product.preco" />
+
+        <div class="buttons">
+            <app-button [func]="close">Cancelar</app-button>
+            <app-button [func]="save">Salvar</app-button>
+        </div>
+    </form>
+</dialog>

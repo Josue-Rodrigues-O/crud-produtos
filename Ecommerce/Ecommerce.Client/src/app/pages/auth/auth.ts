@@ -1,5 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { AuthService } from '../../services/auth/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-auth',
@@ -9,8 +11,14 @@ import { Component } from '@angular/core';
 })
 export class Auth {
 
-  constructor(http: HttpClient) {
-    http.post<{ access_token: string }>("/api/auth/login", { username: 'admin', password: '#Adm1234' })
-      .subscribe(dados => localStorage.setItem('token', dados.access_token));
+  constructor(private router: Router, private authService: AuthService) {
+
+  }
+
+  onClickLogin() {
+    this.authService.login().subscribe({
+      next: dados => this.authService.setToken(dados.access_token),
+      complete: () => this.router.navigate(['/ecommerce'])
+    });
   }
 }
