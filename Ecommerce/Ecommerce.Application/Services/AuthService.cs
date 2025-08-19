@@ -14,7 +14,7 @@ namespace Ecommerce.Application.Services
             if (username != "admin" || password != "#Adm1234")
                 return null;
 
-            var jwt = new Secrets.Jwt(config);
+            var jwt = new JwtConfig(config);
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwt.Key));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
             var token = new JwtSecurityToken(

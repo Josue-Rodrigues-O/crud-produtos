@@ -1,14 +1,17 @@
 ﻿using Ecommerce.Domain;
+using Ecommerce.Infrastructure.Configurations;
 using Microsoft.Data.SqlClient;
+using Microsoft.Extensions.Configuration;
 
 namespace Ecommerce.Infrastructure.SqlServer
 {
-    public sealed class ProductRepository : IProductRepository
+    public sealed class SqlServerProductRepository : IProductRepository
     {
         private readonly SqlConnection sqlConnection;
-        public ProductRepository()
+        public SqlServerProductRepository(IConfiguration configuration)
         {
-            sqlConnection = SqlInstance.Create();
+            var sqlServerConfigs = new SqlServerConfig(configuration);
+            sqlConnection = SqlServerInstance.Create(sqlServerConfigs);
             sqlConnection.Open();
         }
 
@@ -93,7 +96,7 @@ namespace Ecommerce.Infrastructure.SqlServer
             command.ExecuteNonQuery();
         }
 
-        ~ProductRepository()
+        ~SqlServerProductRepository()
         {
             sqlConnection.Dispose();
         }
