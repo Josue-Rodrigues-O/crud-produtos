@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 
 @Component({
@@ -7,5 +8,9 @@ import { Component } from '@angular/core';
   styleUrl: './products.css'
 })
 export class Products {
-
+  constructor(http: HttpClient) {
+    http.get('/api/products').subscribe(dados => {
+      console.log('Dados recebidos:', dados);
+    });
+  }
 }

@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 
 @Component({
@@ -8,4 +9,8 @@ import { Component } from '@angular/core';
 })
 export class Auth {
 
+  constructor(http: HttpClient) {
+    http.post<{ access_token: string }>("/api/auth/login", { username: 'admin', password: '#Adm1234' })
+      .subscribe(dados => localStorage.setItem('token', dados.access_token));
+  }
 }
