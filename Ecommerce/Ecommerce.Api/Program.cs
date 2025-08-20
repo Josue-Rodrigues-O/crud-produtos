@@ -9,11 +9,12 @@ namespace Ecommerce.Api
             var builder = WebApplication.CreateBuilder(args);
 
             builder.Configuration.AddJsonFile("secrets/secrets.json", optional: true, reloadOnChange: true);
+            builder.ConfigureJwt();
+            builder.ConfigureDatabase();
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
             builder.Services.AddDependencies();
-            builder.ConfigureJwt();
             builder.Services.AddAuthorization();
 
             var app = builder.Build();

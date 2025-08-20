@@ -2,6 +2,8 @@
 using Ecommerce.Domain;
 using Ecommerce.Infrastructure.Configurations;
 using Ecommerce.Infrastructure.MySql;
+using Ecommerce.Infrastructure.Scripts.MySql.StartDatabase;
+using Ecommerce.Infrastructure.Scripts.SqlServer.StartDatabase;
 using Ecommerce.Infrastructure.SqlServer;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
@@ -13,9 +15,28 @@ namespace Ecommerce.Api
     {
         public static void AddDependencies(this IServiceCollection services)
         {
-            services.AddScoped<IProductRepository, MySqlProductRepository>();
             services.AddScoped<ProductService>();
             services.AddScoped<AuthService>();
+        }
+
+        public static void ConfigureDatabase(this WebApplicationBuilder builder)
+        {
+            var provider = builder.Configuration["Database:Provider"];
+            switch (provider)
+            {
+                case "SqlServer":
+                    SqlServerInit.StartDatabase(builder.Configuration);
+                    builder.Services.AddScoped<IProductRepository, SqlServerProductRepository>();
+                    break;
+
+                case "MySql":
+                    MySqlInit.StartDatabase(builder.Configuration);
+                    builder.Services.AddScoped<IProductRepository, MySqlProductRepository>();
+                    break;
+
+                default:
+                    throw new Exception("Provedor de banco desconhecido");
+            }
         }
 
         public static void ConfigureJwt(this WebApplicationBuilder builder)

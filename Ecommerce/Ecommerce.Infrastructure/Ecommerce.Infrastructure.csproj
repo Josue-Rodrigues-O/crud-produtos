@@ -7,6 +7,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Scripts\MySql\mysql_init.sql" />
+    <None Remove="Scripts\SqlServer\sqlserver_init.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Scripts\MySql\StartDatabase\mysql_init.sql" />
+    <EmbeddedResource Include="Scripts\SqlServer\StartDatabase\sqlserver_init.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.Data.SqlClient" Version="6.1.1" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="9.0.8" />
     <PackageReference Include="MySql.Data" Version="9.4.0" />

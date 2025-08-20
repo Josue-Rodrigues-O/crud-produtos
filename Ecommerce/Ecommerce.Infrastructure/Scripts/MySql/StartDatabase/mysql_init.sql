@@ -1,0 +1,34 @@
+create database if not exists {{DB_NAME}} CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+use {{DB_NAME}};
+
+CREATE TABLE IF NOT EXISTS Departments (
+    Id int auto_increment PRIMARY KEY,
+    Codigo VARCHAR(3) NOT NULL UNIQUE,
+    Descricao VARCHAR(255) NOT NULL,
+    DataCriacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	DataAtualizacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS Products (
+    Id CHAR(36) PRIMARY KEY,
+    Codigo VARCHAR(50) NOT NULL UNIQUE,
+    Descricao VARCHAR(255) NOT NULL,
+    Departamento VARCHAR(3) NOT NULL,
+    Preco DECIMAL(10,2) NOT NULL CHECK (Preco >= 0),
+    Status BOOLEAN NOT NULL DEFAULT TRUE,
+    DataCriacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    DataAtualizacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    CONSTRAINT fk_products_departamento FOREIGN KEY (Departamento) REFERENCES Departments(Codigo)
+);
+
+INSERT INTO Departments (Codigo, Descricao)
+SELECT * FROM (
+    SELECT '010' AS Codigo, 'BEBIDAS' AS Descricao
+    UNION ALL
+    SELECT '020', 'CONGELADOS'
+    UNION ALL
+    SELECT '030', 'LATICINIOS'
+    UNION ALL
+    SELECT '040', 'VEGETAIS'
+) AS tmp
+WHERE NOT EXISTS (SELECT 1 FROM Departments);
