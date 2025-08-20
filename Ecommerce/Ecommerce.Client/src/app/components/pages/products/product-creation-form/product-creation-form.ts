@@ -10,8 +10,6 @@ import { RequestService } from '../../../../services/request/request.service';
 import { Select } from "../../../reusable/select/select";
 import { DepartmentService } from '../../../../services/department/department.service';
 import { SelectItem } from '../../../../models/select-item';
-import { map } from 'rxjs';
-import { Department } from '../../../../models/department';
 
 @Component({
   selector: 'app-product-creation-form',

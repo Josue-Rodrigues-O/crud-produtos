@@ -1,6 +1,7 @@
 <header>
     <h2>Produtos</h2>
-    <app-button [func]="formCreation.open">Adicionar <i class="material-symbols-rounded">add</i></app-button>
+    <app-button class="btn-add" [func]="formCreation.open">Adicionar <i
+            class="material-symbols-rounded">add</i></app-button>
 </header>
 <main>
     <table>
@@ -10,16 +11,16 @@
             <th>Departamento</th>
             <th>Preço</th>
             <th>Status</th>
-            <th>Actions</th>
+            <th></th>
         </thead>
         <tbody>
             @for (product of products; track $index) {
             <tr>
                 <th>{{product.codigo}}</th>
                 <th>{{product.descricao}}</th>
-                <th>{{product.departamento}}</th>
-                <th>{{product.preco}}</th>
-                <th>{{product.status}}</th>
+                <th>{{product.departamento | descriptionFromList: departments}}</th>
+                <th>{{product.preco | priceLabel}}</th>
+                <th>{{product.status | statusLabel}}</th>
                 <th>
                     @if (product.status) {
                     <i class="material-symbols-rounded icon-clickable"

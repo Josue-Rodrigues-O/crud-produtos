@@ -1,0 +1,17 @@
+:host {
+    display: flex;
+    height: 100vh;
+}
+
+.banner {
+    max-width: 50vw;
+    max-height: 100%;
+}
+
+main {
+    padding: 10rem;
+    display: grid;
+    gap: 1rem;
+    background-color: #19191C;
+    color: white;
+}

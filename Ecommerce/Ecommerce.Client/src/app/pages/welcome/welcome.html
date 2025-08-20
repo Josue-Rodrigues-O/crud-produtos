@@ -1,1 +1,64 @@
-<p>welcome works!</p>
+<h2>Olá,</h2>
+<p>
+    Esse é um projeto feito com .NET e Angular, fique a vontade para explorar o site.<br>Abaixo tem uma apresentação do
+    projeto.
+</p>
+
+<main>
+    <aside class="panel">
+        <h2>Sobre a Arquitetura do backend</h2>
+
+        <div class="content">
+            <p>
+                Escolhi a famosa clean architecture para estruturar o projeto, mas fiz adaptações para o escopo do
+                desafio.<br>
+                A estrutura é basicamente: <br>
+                <strong>API</strong> - Camada de comunicação com o front-end<br>
+                <strong>Application</strong> - Camada de serviços usados pela API. Aqui fica encapsulada a lógica de
+                conversão
+                de DTO's para objetos, chamadas dos repositórios, validações extras, etc...<br>
+                <strong>Infrastructure</strong> - Camada responsável pela persistencia das informações. É onde ficam as
+                implementações dos respositórios, conexões com o banco e scipts do banco de dados.<br>
+                <strong>Domain</strong> - Camada onde ficam as regras de negócios. Seguindo os princípios do DDD, aqui
+                devem
+                ficar os modelos de dados com suas validações e as interfaces que serão usadas abstrair a lógica do
+                banco de
+                dados.<br>
+            </p>
+        </div>
+    </aside>
+
+    <aside class="panel">
+        <h2>Sobre a Arquitetura do front-end</h2>
+
+        <div class="content">
+            <p>
+                Optei por utilizar uma divisão de arquivos por contexto.<br>
+            </p>
+            <pre>
+<code style="font-family: monospace;">
+    components
+        - pages
+        - reuseble
+    interceptors
+    models
+    pages
+    services
+</code>
+            </pre>
+        </div>
+    </aside>
+
+    <aside class="panel last-item">
+        <h2>Banco de dados</h2>
+
+        <div class="content">
+            <p>
+                Esse projeto possui suporte a dois bancos de dados, MySql e Sql Server.<br>
+                Cada um possui um script para criação e configuração do banco e das tabelas. E, com a injeção de
+                dependencia, é
+                possível trocar facilmente entres os bancos sem precisar modificar o código do projeto
+            </p>
+        </div>
+    </aside>
+</main>

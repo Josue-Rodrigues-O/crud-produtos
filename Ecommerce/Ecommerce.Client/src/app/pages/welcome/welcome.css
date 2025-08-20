@@ -1,0 +1,46 @@
+:host {
+    position: relative;
+    padding: 2rem;
+    width: 100%;
+}
+
+main {
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 1rem;
+}
+
+.last-item {
+    grid-column: span 2;
+}
+
+.banner {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 20rem;
+}
+
+h2 {
+    color: #7F52FF;
+}
+
+.panel {
+    margin: 1rem 0rem;
+    background-color: #252525;
+    padding: 1rem;
+    border-radius: 4pt;
+    color: white;
+
+    h2 {
+        margin-bottom: 1rem;
+    }
+}
+
+p {
+    text-align: justify;
+}
+
+.content {
+    padding: 1rem;
+}

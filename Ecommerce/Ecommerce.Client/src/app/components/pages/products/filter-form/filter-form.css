@@ -1,5 +1,7 @@
 :host {
-    border: 1px solid gray;
+    /* border: 1px solid gray; */
+    background-color: #252525;
+    color: white;
     border-radius: 4pt;
     padding: 1rem;
     position: fixed;

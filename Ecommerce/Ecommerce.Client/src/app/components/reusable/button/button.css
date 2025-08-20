@@ -13,10 +13,12 @@ button {
     display: flex;
     text-align: center;
     justify-content: center;
-    transition: filter 0.2, color 0.2s;
+    background-color: #E8E8E8;
+    transition: background-color 0.2, color 0.2s;
 }
 
 button:hover {
     cursor: pointer;
-    filter: brightness(95%);
+    color: white;
+    background-color: #7F52FF;
 }

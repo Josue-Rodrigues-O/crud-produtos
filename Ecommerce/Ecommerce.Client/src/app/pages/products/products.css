@@ -1,5 +1,6 @@
 :host {
     display: block;
+    position: relative;
     width: 100%;
     padding: 2rem;
 }
@@ -15,6 +16,11 @@ header {
     margin-bottom: 1rem;
 }
 
+.btn-add {
+    position: absolute;
+    right: calc(100% - calc(100% - 300px - 3rem));
+}
+
 table {
     border-collapse: collapse;
     font-family: sans-serif;
@@ -24,7 +30,8 @@ table {
 }
 
 thead {
-    background-color: rgb(228 240 245);
+    background-color: #7F52FF;
+    color: white;
 }
 
 th {
@@ -32,9 +39,20 @@ th {
 }
 
 tr:hover {
-    background-color: #D6EEEE;
+    background-color: #e7defd;
 }
 
 tr {
     border-bottom: 1px solid #ddd;
+}
+
+.icon-clickable {
+    border-radius: 4pt;
+    color: gray;
+    transition: color 0.2s;
+}
+
+.icon-clickable:hover {
+    cursor: pointer;
+    color: black;
 }

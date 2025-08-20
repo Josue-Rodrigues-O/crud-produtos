@@ -7,23 +7,31 @@ import { Button } from "../../components/reusable/button/button";
 import { FilterForm } from "../../components/pages/products/filter-form/filter-form";
 import { ProductFilterFields } from '../../models/product-filter-fields';
 import { ActivatedRoute, Router } from '@angular/router';
+import { StatusLabelPipe } from "../../pipes/StatusLabelPipe";
+import { DescriptionFromListPipe } from "../../pipes/DepartmentLabelPipe";
+import { SelectItem } from '../../models/select-item';
+import { DepartmentService } from '../../services/department/department.service';
+import { PriceLabelPipe } from "../../pipes/PriceLabelPipe";
 
 @Component({
   selector: 'app-products',
-  imports: [ProductCreationForm, ProductEditingForm, Button, FilterForm],
+  imports: [ProductCreationForm, ProductEditingForm, Button, FilterForm, StatusLabelPipe, DescriptionFromListPipe, PriceLabelPipe],
   templateUrl: './products.html',
   styleUrl: './products.css'
 })
 export class Products implements OnInit {
   products: Product[] = [];
+  departments!: SelectItem[];
   filter!: ProductFilterFields;
 
   constructor(private productService: ProductService,
     private route: ActivatedRoute,
-    private router: Router) {
+    private router: Router,
+    private departmentService: DepartmentService) {
   }
 
   ngOnInit() {
+    this.loadDepartments();
     this.route.queryParams.subscribe(params => {
       this.filter = {
         codigo: params['codigo'] || '',
@@ -55,5 +63,13 @@ export class Products implements OnInit {
     this.productService.delete(id).subscribe({
       complete: () => this.updateList()
     });
+  }
+
+  private loadDepartments() {
+    this.departmentService
+      .getAll()
+      .subscribe({
+        next: res => this.departments = res
+      });
   }
 }

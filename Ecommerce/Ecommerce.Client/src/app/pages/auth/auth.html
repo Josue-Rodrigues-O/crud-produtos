@@ -1,4 +1,7 @@
-<h1>Olá, seja bem-vindo!</h1>
-<h2>Esse é o login simplificado, clique no botão para ser redirecionado à página principal.</h2>
-
-<button (click)="onClickLogin()">Ir para página principal</button>
+<img class="banner" src="images/banner_login.jpg" />
+<main>
+    <h1>Olá, seja bem-vindo!</h1>
+    <h2>Esse é o login simplificado, clique no botão para ser redirecionado à página principal.</h2>
+    
+    <app-button [func]="onClickLogin">Ir para página principal</app-button>
+</main>

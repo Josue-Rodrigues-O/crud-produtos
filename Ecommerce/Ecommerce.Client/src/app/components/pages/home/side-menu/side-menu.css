@@ -1,8 +1,11 @@
 :host {
     display: block;
     height: 92vh;
-    width: 350px;
-    border-right: 1px solid gray;
+    width: 300px;
+    background-color: #252525;
+    color: white;
+    position: fixed;
+    /* border-right: 1px solid gray; */
 }
 
 details {
@@ -13,7 +16,7 @@ details {
 summary {
     display: flex;
     align-items: center;
-    font-weight: bold;
+    font-weight: 600;
     margin-bottom: 0.1rem;
     list-style-type: none;
     cursor: pointer;
@@ -23,8 +26,7 @@ summary {
 }
 
 summary:hover {
-    background-color: #f0f0f0;
-    filter: brightness(95%);
+    background-color: #7F52FF;
 }
 
 .arrow {
@@ -45,6 +47,9 @@ details[open]>summary .arrow {
 }
 
 .menu-item:hover {
-    background-color: #f3f3f3;
-    filter: brightness(95%);
+    background-color: #7F52FF;
+}
+
+.unique-item {
+    margin: 0rem 0.5em;
 }

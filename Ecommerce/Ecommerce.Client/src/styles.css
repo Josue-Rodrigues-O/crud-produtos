@@ -2,7 +2,11 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: Verdana, sans-serif;
+    font-family: "Open Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-variation-settings:
+        "wdth" 100;
 }
 
 .material-symbols-rounded {
@@ -12,23 +16,10 @@
         'GRAD' 200,
         'opsz' 24;
     font-size: 20px;
-    color: #434242;
 }
-
 
 label {
     font-size: 14px;
-}
-
-.icon-clickable {
-    border-radius: 4pt;
-    transition: filter 0.2, color 0.2s;
-}
-
-.icon-clickable:hover {
-    cursor: pointer;
-    color: black;
-    filter: brightness(55%);
 }
 
 h1 {
