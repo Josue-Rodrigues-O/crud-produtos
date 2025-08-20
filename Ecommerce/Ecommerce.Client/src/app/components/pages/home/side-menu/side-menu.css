@@ -1,6 +1,50 @@
 :host {
-    background-color: blue;
     display: block;
     height: 92vh;
-    width: 200px;
+    width: 350px;
+    border-right: 1px solid gray;
+}
+
+details {
+    border-radius: 4px;
+    padding: 0.5em;
+}
+
+summary {
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+    margin-bottom: 0.1rem;
+    list-style-type: none;
+    cursor: pointer;
+    padding: 0.25em 0.5em;
+    border-radius: 4px;
+    transition: background-color 0.2s, filter 0.2s;
+}
+
+summary:hover {
+    background-color: #f0f0f0;
+    filter: brightness(95%);
+}
+
+.arrow {
+    transition: transform 0.2s;
+    margin-right: 0.5rem;
+}
+
+details[open]>summary .arrow {
+    transform: rotate(90deg);
+}
+
+.menu-item {
+    display: block;
+    padding: 0.25em 0.5em 0.25em 3em;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s, filter 0.2s;
+}
+
+.menu-item:hover {
+    background-color: #f3f3f3;
+    filter: brightness(95%);
 }

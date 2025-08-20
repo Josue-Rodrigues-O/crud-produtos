@@ -1,0 +1,18 @@
+:host {
+    display: block
+}
+
+select {
+    width: 100%;
+    padding: 0.5rem;
+    background-color: rgb(194, 215, 255);
+    border-radius: 4pt;
+    border: none;
+    outline: none;
+    box-shadow: none;
+}
+
+span {
+    color: red;
+    font-size: 12px;
+}

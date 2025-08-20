@@ -42,13 +42,13 @@ export class ProductCreationForm {
   saved = output<void>();
 
   open = () => {
+    this.loadDepartments();
     this.product = {
       codigo: '',
       descricao: '',
-      departamento: '',
+      departamento: String(this.departments[0].key),
       preco: 0,
     }
-    this.loadDepartments();
     this.dialog.nativeElement.showModal();
   }
 

@@ -21,9 +21,9 @@
                 <th>{{product.preco}}</th>
                 <th>{{product.status}}</th>
                 <th>
+                    @if (product.status) {
                     <i class="material-symbols-rounded icon-clickable"
                         (click)="formEditing.open(product.id || '')">edit</i>
-                    @if (product.status) {
                     <i class="material-symbols-rounded icon-clickable"
                         (click)="deleteProduct(product.id || '')">delete</i>
                     }

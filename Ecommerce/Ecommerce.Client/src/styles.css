@@ -30,3 +30,7 @@ label {
     color: black;
     filter: brightness(55%);
 }
+
+h1 {
+    font-size: x-large;
+}
