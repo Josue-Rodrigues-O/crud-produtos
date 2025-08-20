@@ -1,5 +1,6 @@
 ﻿using Ecommerce.Application.Dtos;
 using Ecommerce.Domain;
+using Ecommerce.Domain.Products;
 
 namespace Ecommerce.Application.Services
 {
@@ -12,9 +13,9 @@ namespace Ecommerce.Application.Services
             return produto;
         }
 
-        public IEnumerable<Product> GetAll()
+        public IEnumerable<Product> GetAll(ProductFilter filter)
         {
-            return repository.GetAll();
+            return repository.GetAll(filter);
         }
 
         public Product? GetById(Guid id)

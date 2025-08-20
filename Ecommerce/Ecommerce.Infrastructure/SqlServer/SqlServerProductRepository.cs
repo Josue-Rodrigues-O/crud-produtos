@@ -1,4 +1,5 @@
 ﻿using Ecommerce.Domain;
+using Ecommerce.Domain.Products;
 using Ecommerce.Infrastructure.Configurations;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
@@ -31,11 +32,46 @@ namespace Ecommerce.Infrastructure.SqlServer
             command.ExecuteReader();
         }
 
-        public IEnumerable<Product> GetAll()
+        public IEnumerable<Product> GetAll(ProductFilter filter)
         {
-            var query = @"SELECT Id, Codigo, Descricao, Departamento, Preco, Status FROM Products";
-
+            var query = @$"SELECT Id, Codigo, Descricao, Departamento, Preco, Status FROM Products";
             using var command = sqlConnection.CreateCommand();
+
+            if (filter.IncluirItensInativos.GetValueOrDefault())
+                query += " WHERE (Status = 1 OR Status = 0)";
+            else
+                query += " WHERE Status = 1";
+
+            if (!string.IsNullOrWhiteSpace(filter.Codigo))
+            {
+                query += " AND Codigo = @codigo";
+                command.Parameters.AddWithValue("@codigo", filter.Codigo);
+            }
+
+            if (!string.IsNullOrWhiteSpace(filter.Descricao))
+            {
+                query += " AND Descricao LIKE @descricao";
+                command.Parameters.AddWithValue("@descricao", $"%{filter.Descricao}%");
+            }
+
+            if (!string.IsNullOrWhiteSpace(filter.Departamento))
+            {
+                query += " AND Departamento = @departamento";
+                command.Parameters.AddWithValue("@departamento", filter.Departamento);
+            }
+
+            if (filter.PrecoInicial.GetValueOrDefault() > 0)
+            {
+                query += " AND Preco >= @precoInicial";
+                command.Parameters.AddWithValue("@precoInicial", filter.PrecoInicial);
+            }
+
+            if (filter.PrecoFinal.GetValueOrDefault() > 0)
+            {
+                query += " AND Preco <= @precoFinal";
+                command.Parameters.AddWithValue("@precoFinal", filter.PrecoFinal);
+            }
+
             command.CommandText = query;
             using var reader = command.ExecuteReader();
 

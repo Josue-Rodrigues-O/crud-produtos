@@ -1,6 +1,6 @@
 ﻿using Ecommerce.Domain.Exceptions;
 
-namespace Ecommerce.Domain
+namespace Ecommerce.Domain.Products
 {
     public class Product
     {

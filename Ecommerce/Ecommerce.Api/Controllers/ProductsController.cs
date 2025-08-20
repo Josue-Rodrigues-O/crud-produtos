@@ -1,5 +1,6 @@
 ﻿using Ecommerce.Application.Dtos;
 using Ecommerce.Application.Services;
+using Ecommerce.Domain.Products;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -18,9 +19,9 @@ namespace Ecommerce.Api.Controllers
         }
 
         [HttpGet]
-        public OkObjectResult GetAll()
+        public OkObjectResult GetAll([FromQuery] ProductFilter filter)
         {
-            return Ok(productService.GetAll());
+            return Ok(productService.GetAll(filter));
         }
 
         [HttpGet("{id:guid}")]
