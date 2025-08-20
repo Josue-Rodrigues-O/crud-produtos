@@ -1,6 +1,6 @@
 <h2>Olá,</h2>
 <p>
-    Esse é um projeto feito com .NET e Angular, fique a vontade para explorar o site.<br>Abaixo tem uma apresentação do
+    Esse é um projeto feito com .NET e Angular, fique à vontade para explorar o site.<br>Abaixo tem uma apresentação do
     projeto.
 </p>
 
@@ -10,18 +10,17 @@
 
         <div class="content">
             <p>
-                Escolhi a famosa clean architecture para estruturar o projeto, mas fiz adaptações para o escopo do
-                desafio.<br>
+                Escolhi a famosa clean architecture para estruturar o projeto, mas fiz adaptações para o escopo do desafio.<br>
                 A estrutura é basicamente: <br>
                 <strong>API</strong> - Camada de comunicação com o front-end<br>
                 <strong>Application</strong> - Camada de serviços usados pela API. Aqui fica encapsulada a lógica de
                 conversão
-                de DTO's para objetos, chamadas dos repositórios, validações extras, etc...<br>
-                <strong>Infrastructure</strong> - Camada responsável pela persistencia das informações. É onde ficam as
-                implementações dos respositórios, conexões com o banco e scipts do banco de dados.<br>
+                de DTO's para objetos, chamadas dos repositórios, validações extras, etc.<br>
+                <strong>Infrastructure</strong> - Camada responsável pela persistência das informações. É onde ficam as
+                implementações dos repositórios, conexões com o banco e scipts do banco de dados.<br>
                 <strong>Domain</strong> - Camada onde ficam as regras de negócios. Seguindo os princípios do DDD, aqui
                 devem
-                ficar os modelos de dados com suas validações e as interfaces que serão usadas abstrair a lógica do
+                ficar os modelos de dados com suas validações e as interfaces que serão usadas para abstrair a lógica do
                 banco de
                 dados.<br>
             </p>
@@ -43,6 +42,7 @@
     interceptors
     models
     pages
+    pipes
     services
 </code>
             </pre>
@@ -56,8 +56,8 @@
             <p>
                 Esse projeto possui suporte a dois bancos de dados, MySql e Sql Server.<br>
                 Cada um possui um script para criação e configuração do banco e das tabelas. E, com a injeção de
-                dependencia, é
-                possível trocar facilmente entres os bancos sem precisar modificar o código do projeto
+                dependência, é
+                possível trocar facilmente entre os bancos sem precisar modificar o código do projeto
             </p>
         </div>
     </aside>
