@@ -7,10 +7,13 @@ import { Button } from "../../../reusable/button/button";
 import { InputBase } from '../../../../models/input-base';
 import { FieldValidation } from '../../../../models/field-validation';
 import { RequestService } from '../../../../services/request/request.service';
+import { DepartmentService } from '../../../../services/department/department.service';
+import { SelectItem } from '../../../../models/select-item';
+import { Select } from "../../../reusable/select/select";
 
 @Component({
   selector: 'app-product-editing-form',
-  imports: [Input, InputDecimal, Button],
+  imports: [Input, InputDecimal, Button, Select],
   templateUrl: './product-editing-form.html',
   styleUrl: './product-editing-form.css'
 })
@@ -19,6 +22,7 @@ export class ProductEditingForm {
   @ViewChild('descricao') inpDescricao!: InputBase;
   @ViewChild('departamento') inpDepartamento!: InputBase;
   @ViewChild('preco') inpPreco!: InputBase;
+  departments!: SelectItem[];
   product: Product = {
     codigo: '',
     descricao: '',
@@ -27,10 +31,15 @@ export class ProductEditingForm {
   }
   private selectedProductId: string = '';
 
-  constructor(private productService: ProductService, private requestService: RequestService) { }
+  constructor(
+    private productService: ProductService,
+    private requestService: RequestService,
+    private departmentService: DepartmentService
+  ) { }
 
   saved = output<void>();
   open(productId: string) {
+    this.loadDepartments();
     this.selectedProductId = productId;
     this.productService
       .getById(productId)
@@ -65,5 +74,13 @@ export class ProductEditingForm {
       { id: "departamento", field: this.inpDepartamento },
       { id: "preco", field: this.inpPreco },
     ];
+  }
+
+  private loadDepartments() {
+    this.departmentService
+      .getAll()
+      .subscribe({
+        next: res => this.departments = res
+      });
   }
 }

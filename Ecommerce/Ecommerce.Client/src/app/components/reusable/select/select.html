@@ -1,0 +1,8 @@
+<select (change)="onChange($event)" [value]="value()">
+    @for (item of options(); track $index) {
+    <option [value]="item.key">{{item.description}}</option>
+    }
+</select>
+@if (isInvalidValue) {
+<span>{{messageError}}</span>
+}

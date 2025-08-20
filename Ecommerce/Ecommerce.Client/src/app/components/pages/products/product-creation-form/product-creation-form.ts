@@ -7,10 +7,15 @@ import { Button } from "../../../reusable/button/button";
 import { InputBase } from '../../../../models/input-base';
 import { FieldValidation } from '../../../../models/field-validation';
 import { RequestService } from '../../../../services/request/request.service';
+import { Select } from "../../../reusable/select/select";
+import { DepartmentService } from '../../../../services/department/department.service';
+import { SelectItem } from '../../../../models/select-item';
+import { map } from 'rxjs';
+import { Department } from '../../../../models/department';
 
 @Component({
   selector: 'app-product-creation-form',
-  imports: [Input, InputDecimal, Button],
+  imports: [Input, InputDecimal, Button, Select],
   templateUrl: './product-creation-form.html',
   styleUrl: './product-creation-form.css'
 })
@@ -20,6 +25,7 @@ export class ProductCreationForm {
   @ViewChild('descricao') inpDescricao!: InputBase;
   @ViewChild('departamento') inpDepartamento!: InputBase;
   @ViewChild('preco') inpPreco!: InputBase;
+  departments!: SelectItem[];
   product: Product = {
     codigo: '',
     descricao: '',
@@ -27,7 +33,11 @@ export class ProductCreationForm {
     preco: 0,
   }
 
-  constructor(private productService: ProductService, private requestService: RequestService) { }
+  constructor(
+    private productService: ProductService,
+    private requestService: RequestService,
+    private departmentService: DepartmentService
+  ) { }
 
   saved = output<void>();
 
@@ -38,6 +48,7 @@ export class ProductCreationForm {
       departamento: '',
       preco: 0,
     }
+    this.loadDepartments();
     this.dialog.nativeElement.showModal();
   }
 
@@ -67,5 +78,13 @@ export class ProductCreationForm {
       { id: "departamento", field: this.inpDepartamento },
       { id: "preco", field: this.inpPreco },
     ];
+  }
+
+  private loadDepartments() {
+    this.departmentService
+      .getAll()
+      .subscribe({
+        next: res => this.departments = res
+      });
   }
 }

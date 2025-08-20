@@ -9,7 +9,8 @@
         <app-input #descricao placeholder="Ex.: Frango" [(value)]="product.descricao" />
 
         <label>Departamento</label>
-        <app-input #departamento placeholder="Ex.: CONGELADOS" [(value)]="product.departamento" />
+        <app-select #departamento [options]="departments" [(value)]="product.departamento"></app-select>
+        <!-- <app-input #departamento placeholder="Ex.: CONGELADOS" [(value)]="product.departamento" /> -->
 
         <label>Preço</label>
         <app-input-decimal #preco placeholder="Ex.: 18,50" [(value)]="product.preco" />
