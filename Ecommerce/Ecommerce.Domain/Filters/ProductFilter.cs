@@ -1,4 +1,4 @@
-﻿namespace Ecommerce.Domain.Products
+﻿namespace Ecommerce.Domain.Filters
 {
     public class ProductFilter
     {

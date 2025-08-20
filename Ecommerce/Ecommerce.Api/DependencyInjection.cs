@@ -1,5 +1,5 @@
 ﻿using Ecommerce.Application.Services;
-using Ecommerce.Domain;
+using Ecommerce.Domain.Repositories;
 using Ecommerce.Infrastructure.Configurations;
 using Ecommerce.Infrastructure.MySql;
 using Ecommerce.Infrastructure.Scripts.MySql.StartDatabase;
@@ -16,6 +16,7 @@ namespace Ecommerce.Api
         public static void AddDependencies(this IServiceCollection services)
         {
             services.AddScoped<ProductService>();
+            services.AddScoped<DepartmentService>();
             services.AddScoped<AuthService>();
         }
 
@@ -27,11 +28,13 @@ namespace Ecommerce.Api
                 case "SqlServer":
                     SqlServerInit.StartDatabase(builder.Configuration);
                     builder.Services.AddScoped<IProductRepository, SqlServerProductRepository>();
+                    builder.Services.AddScoped<IDepartmentRepository, SqlServerDepartmentRepository>();
                     break;
 
                 case "MySql":
                     MySqlInit.StartDatabase(builder.Configuration);
                     builder.Services.AddScoped<IProductRepository, MySqlProductRepository>();
+                    builder.Services.AddScoped<IDepartmentRepository, MySqlDepartmentRepository>();
                     break;
 
                 default:

@@ -1,6 +1,7 @@
-﻿using Ecommerce.Domain.Products;
+﻿using Ecommerce.Domain.Filters;
+using Ecommerce.Domain.Models;
 
-namespace Ecommerce.Domain
+namespace Ecommerce.Domain.Repositories
 {
     public interface IProductRepository
     {

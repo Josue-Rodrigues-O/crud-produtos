@@ -1,6 +1,6 @@
 ﻿using Ecommerce.Domain.Exceptions;
 
-namespace Ecommerce.Domain.Products
+namespace Ecommerce.Domain.Models
 {
     public class Product
     {
@@ -13,7 +13,7 @@ namespace Ecommerce.Domain.Products
 
         private readonly Dictionary<string, string[]> _exceptions = [];
 
-        public Product(string codigo, string descricao, string departamento, decimal preco)
+        public Product(string codigo, string descricao, int departamento, decimal preco)
         {
             ValidateCodigo(codigo);
             ValidateDescricao(descricao);
@@ -24,7 +24,7 @@ namespace Ecommerce.Domain.Products
             Id = Guid.NewGuid();
             Codigo = codigo;
             Descricao = descricao;
-            Departamento = departamento;
+            Departamento = departamento.ToString().PadLeft(3, '0');
             Preco = preco;
             Status = true;
         }
@@ -42,14 +42,14 @@ namespace Ecommerce.Domain.Products
         public static Product FromDatabase(Guid id, string codigo, string descricao, string departamento, decimal preco, bool status)
             => new(id, codigo, descricao, departamento, preco, status);
 
-        public void Update(string descricao, string departamento, decimal preco)
+        public void Update(string descricao, int departamento, decimal preco)
         {
             ValidateDescricao(descricao);
             ValidateDepartamento(departamento);
             ValidatePreco(preco);
             CheckForErrors();
 
-            Departamento = departamento;
+            Departamento = departamento.ToString().PadLeft(3, '0');
             Descricao = descricao;
             Preco = preco;
         }
@@ -79,11 +79,14 @@ namespace Ecommerce.Domain.Products
                 _exceptions["descricao"] = errors.ToArray();
         }
 
-        private void ValidateDepartamento(string departamento)
+        private void ValidateDepartamento(int departamento)
         {
-            var errors = new List<string>(1);
-            if (string.IsNullOrEmpty(departamento))
-                errors.Add("O campo 'Departamento' não pode ficar vazio.");
+            var errors = new List<string>(2);
+            if (departamento > 999)
+                errors.Add("O valor informado no campo 'Departamento' é muito extenso, informe um valor menor que 1000.");
+
+            if (departamento <= 0)
+                errors.Add("O valor do campo 'Código' deve ser maior que 0.");
 
             if (errors.Count > 0)
                 _exceptions["departamento"] = errors.ToArray();

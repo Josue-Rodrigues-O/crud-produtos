@@ -1,6 +1,7 @@
 ﻿using Ecommerce.Application.Dtos;
-using Ecommerce.Domain;
-using Ecommerce.Domain.Products;
+using Ecommerce.Domain.Filters;
+using Ecommerce.Domain.Models;
+using Ecommerce.Domain.Repositories;
 
 namespace Ecommerce.Application.Services
 {

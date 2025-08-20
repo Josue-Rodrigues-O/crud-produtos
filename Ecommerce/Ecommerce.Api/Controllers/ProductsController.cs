@@ -1,6 +1,6 @@
 ﻿using Ecommerce.Application.Dtos;
 using Ecommerce.Application.Services;
-using Ecommerce.Domain.Products;
+using Ecommerce.Domain.Filters;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
