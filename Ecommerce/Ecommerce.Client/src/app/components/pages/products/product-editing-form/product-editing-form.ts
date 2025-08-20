@@ -1,4 +1,4 @@
-import { Component, ElementRef, input, ViewChild } from '@angular/core';
+import { Component, ElementRef, input, output, ViewChild } from '@angular/core';
 import { Input } from "../../../reusable/input/input";
 import { Product } from '../../../../models/product';
 import { ProductService } from '../../../../services/product/product.service';
@@ -29,6 +29,7 @@ export class ProductEditingForm {
 
   constructor(private productService: ProductService, private requestService: RequestService) { }
 
+  saved = output<void>();
   open(productId: string) {
     this.selectedProductId = productId;
     this.productService
@@ -51,7 +52,10 @@ export class ProductEditingForm {
       error: res => {
         this.requestService.setErrorInInvalidFields(this.getFieldsValidation(), res.error.errors)
       },
-      complete: () => console.log("fim do cadastro.")
+      complete: () => {
+        this.close()
+        this.saved.emit()
+      }
     });
   }
 

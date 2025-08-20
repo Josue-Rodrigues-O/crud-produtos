@@ -1,0 +1,28 @@
+:host {
+    border: 1px solid gray;
+    border-radius: 4pt;
+    padding: 1rem;
+    position: fixed;
+    right: 2rem;
+    width: 300px;
+}
+
+form {
+    display: grid;
+    gap: 0.5rem;
+}
+
+.price{
+    display: flex;
+    align-items: center;
+    text-wrap-mode: nowrap;
+}
+
+.checkbox{
+    display: flex;
+    align-items: center;
+
+    input {
+        margin-right: 0.5rem;
+    }
+}

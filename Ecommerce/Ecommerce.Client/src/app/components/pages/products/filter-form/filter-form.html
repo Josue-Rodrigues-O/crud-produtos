@@ -1,0 +1,26 @@
+<h3>Filtros</h3>
+
+<form>
+    <label>Código</label>
+    <app-input placeholder="Ex.: P0001" [(value)]="filter().codigo" />
+
+    <label>Descrição</label>
+    <app-input placeholder="Ex.: Frango" [(value)]="filter().descricao" />
+
+    <label>Departamento</label>
+    <app-input placeholder="Ex.: CONGELADOS" [(value)]="filter().departamento" />
+
+    <div class="price">
+        <label>a partir de:</label>
+        <app-input-decimal style="margin: 0 0.5rem;" placeholder="Ex.: 18,50" [(value)]="filter().precoInicial" />
+        <label>Até:</label>
+        <app-input-decimal style="margin-left: 0.5rem;" placeholder="Ex.: 18,50" [(value)]="filter().precoFinal" />
+    </div>
+
+    <div class="checkbox">
+        <input type="checkbox" name="includeInactiveItems" [(ngModel)]="filter().incluirItensInativos">
+        <label>Incluir itens inativos</label>
+    </div>
+
+    <app-button style="width: 100%;" [func]="onClickFilter">Filtrar</app-button>
+</form>

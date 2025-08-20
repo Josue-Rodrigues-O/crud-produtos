@@ -1,31 +1,39 @@
-<h2>Produtos</h2>
-<button (click)="formCreation.open()">Adicionar</button>
-<table>
-    <thead>
-        <th>Código</th>
-        <th>Descrição</th>
-        <th>Departamento</th>
-        <th>Preço</th>
-        <th>Status</th>
-        <th>Actions</th>
-    </thead>
-    <tbody>
-        @for (product of products; track $index) {
-        <tr>
-            <th>{{product.codigo}}</th>
-            <th>{{product.descricao}}</th>
-            <th>{{product.departamento}}</th>
-            <th>{{product.preco}}</th>
-            <th>{{product.status}}</th>
-            <th>
-                <span (click)="formEditing.open(product.id || '')">Editar</span>
-                @if (product.status) {
-                <span>Remover</span>
-                }
-            </th>
-        </tr>
-        }
-    </tbody>
-</table>
-<app-product-creation-form #formCreation></app-product-creation-form>
-<app-product-editing-form #formEditing></app-product-editing-form>
+<header>
+    <h2>Produtos</h2>
+    <app-button [func]="formCreation.open">Adicionar <i class="material-symbols-rounded">add</i></app-button>
+</header>
+<main>
+    <table>
+        <thead>
+            <th>Código</th>
+            <th>Descrição</th>
+            <th>Departamento</th>
+            <th>Preço</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </thead>
+        <tbody>
+            @for (product of products; track $index) {
+            <tr>
+                <th>{{product.codigo}}</th>
+                <th>{{product.descricao}}</th>
+                <th>{{product.departamento}}</th>
+                <th>{{product.preco}}</th>
+                <th>{{product.status}}</th>
+                <th>
+                    <i class="material-symbols-rounded icon-clickable"
+                        (click)="formEditing.open(product.id || '')">edit</i>
+                    @if (product.status) {
+                    <i class="material-symbols-rounded icon-clickable"
+                        (click)="deleteProduct(product.id || '')">delete</i>
+                    }
+                </th>
+            </tr>
+            }
+        </tbody>
+    </table>
+
+    <app-filter-form [filter]="filter" (filtered)="updateFilter($event)"></app-filter-form>
+</main>
+<app-product-creation-form (saved)="updateList()" #formCreation></app-product-creation-form>
+<app-product-editing-form (saved)="updateList()" #formEditing></app-product-editing-form>

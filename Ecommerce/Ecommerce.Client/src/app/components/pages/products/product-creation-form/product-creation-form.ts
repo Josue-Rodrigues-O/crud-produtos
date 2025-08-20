@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, output, ViewChild } from '@angular/core';
 import { Input } from "../../../reusable/input/input";
 import { Product } from '../../../../models/product';
 import { ProductService } from '../../../../services/product/product.service';
@@ -29,7 +29,9 @@ export class ProductCreationForm {
 
   constructor(private productService: ProductService, private requestService: RequestService) { }
 
-  open() {
+  saved = output<void>();
+
+  open = () => {
     this.product = {
       codigo: '',
       descricao: '',
@@ -51,7 +53,10 @@ export class ProductCreationForm {
       error: res => {
         this.requestService.setErrorInInvalidFields(this.getFieldsValidation(), res.error.errors)
       },
-      complete: () => console.log("fim do cadastro.")
+      complete: () => {
+        this.close()
+        this.saved.emit()
+      }
     });
   }
 
