@@ -1,5 +1,53 @@
+### Configurando o âmbiente
+📋 Requisitos
+- Microsoft Sql Server ou MySql intalado
+
+⚙️Configurando projeto
+- Navegue ate o arquivo Ecommerce/Ecommerce.Api/appsettings.json e defina o "Provider" de acordo com o banco escolhido
+```json
+{
+  "Database": {
+    "Provider": "MySql" ou "SqlServer"
+  },
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning"
+    }
+  },
+  "AllowedHosts": "*"
+}
+
+```
+- Na pasta Ecommerce/Ecommerce.Api crie a pasta Secrets e adicione o arquivo secrets.json
+- Dentro do secrets.json cole a seguinte estrutura
+```json
+{
+  "SqlServer": {
+    "DataSource": "127.0.0.1, 1433",  // endereço do banco
+    "User": "usuario-do-banco",
+    "Password": "senha-do-banco",
+    "DatabaseName": "nome-do-banco" // Nome da base de dadod ex. Ecommerce
+  },
+  "MySql": {
+    "Server": "127.0.0.1", // endereço do banco
+    "User": "usuario-do-banco",
+    "Password": "senha-do-banco",
+    "DatabaseName": "nome-do-banco" // Nome da base de dadod ex. Ecommerce
+  },
+  "Jwt": {
+    "Issuer": "Ecommerce.Api",
+    "Audience": "Ecommerce.Client",
+    "Key": "chave-privada-para-criptografia",
+    "ExpiresMinutes": 120 // tempo de duração do token
+  }
+}
+
+```
+
 ### Script de Execução para Backend (.NET) e Frontend (Angular)
 Este script automatiza a execução de uma aplicação full-stack composta por um backend em .NET e um frontend em Angular.
+Obs.: Certifique-se de que o banco está em execução antes de rodar o script
 
 📋 Requisitos
 1. Sistema Operacional
